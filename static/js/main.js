@@ -7,6 +7,7 @@ const NOISE_PX_PERIOD = 20;
 const NOISE_PX_DEVIATION = 2;
 
 window.onload = () => {
+    let tg = window.Telegram.WebApp;
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     const indicator = document.getElementById('indicator');
@@ -46,8 +47,7 @@ window.onload = () => {
         createEl.remove();
     });
 
-    canvas.setAttribute('width', 890);
-    canvas.setAttribute('height', 670);
+    canvas.setAttribute('width', tg.viewportHeight );
 
     ctx.lineWidth = config.lineSize;
     ctx.lineJoin = 'round';
