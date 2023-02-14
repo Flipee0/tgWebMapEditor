@@ -8,6 +8,8 @@ const NOISE_PX_DEVIATION = 2;
 
 window.onload = () => {
 
+    window.Telegram.expand();
+
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     const indicator = document.getElementById('indicator');
