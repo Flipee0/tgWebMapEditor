@@ -47,7 +47,8 @@ window.onload = () => {
         createEl.remove();
     });
 
-    canvas.setAttribute('width', tg.viewportHeight );
+    canvas.setAttribute('width', window.innerWidth);
+    canvas.setAttribute('height', window.innerWidth * (670 / 890));
 
     ctx.lineWidth = config.lineSize;
     ctx.lineJoin = 'round';
@@ -195,7 +196,7 @@ window.onload = () => {
 
     function setBackground() {
         let img = document.getElementById("sketch");
-        ctx.drawImage(img, 0, 0);
+        ctx.drawImage(img, 0, 0, window.innerWidth, window.innerWidth * (670 / 890));
     }
 
     function clearDrawing() {
