@@ -1,5 +1,3 @@
-window.Telegram.WebApp.expand();
-
 const config = {
     'lineSize': 5,
     'color': '#007FF9'
