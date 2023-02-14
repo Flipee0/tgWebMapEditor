@@ -11,6 +11,7 @@ canvas {
 
 #sketch {
     position: absolute;
+    height: var(--tg-viewport-height);
     z-index: -1;
 }
 
