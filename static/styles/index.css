@@ -1,0 +1,20 @@
+* {margin: 0; padding: 0;}
+
+canvas {
+    display: block;
+    touch-action: none;
+}
+
+.isWrite {
+    background-color: red!important;
+}
+
+#sketch {
+    position: absolute;
+    z-index: -1;
+}
+
+body {
+    background: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+}
