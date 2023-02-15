@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100&display=swap');
+
+h1 {
+    color: white;
+    margin: auto;
+    font-family: 'Roboto Slab', serif;
+}
+
+.help {
+    position: absolute;
+    margin-top: 5em;
+    width: 55em;
+    height: 80%;
+    background: #454857;
+    border-radius: 3em;
+    display: none;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.help::-webkit-scrollbar {
+    display: none;
+}
+
+.help {
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.helpControl {
+    display: flex;
+}
+
+#closeHelp {
+    margin: 2em 2em 0 auto;
+    background: #23a6d5;
+}
+
+.helpItems {
+    display: flex;
+    justify-content: left;
+}
+
+.helpText {
+    color: white;
+    font-family: 'Roboto Slab', serif;
+    letter-spacing: 1px;
+    font-size: 16px;
+}
+
+.helpItem {
+    margin-left: 1em;
+    margin-top: 0.3em;
+}
+
+.picDescription {
+    display: flex;
+    align-items: center;
+}

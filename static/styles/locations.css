@@ -1,0 +1,52 @@
+.locationWindow {
+    position: absolute;
+    margin-top: 5em;
+    width: 70%;
+    height: 80%;
+    background: #454857;
+    border-radius: 3em;
+    display: none;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.locationWindow::-webkit-scrollbar {
+    display: none;
+}
+
+.locationWindow {
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.locationControl {
+    display: flex;
+}
+
+#closeLocations {
+    margin: 2em 2em 0 auto;
+    background: #23a6d5;
+}
+
+.locations {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.locationItem {
+    margin: 1em 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.locationName {
+    color: white;
+    margin-bottom: 0.5em;
+}
+
+.locationPreview {
+    width: 20em;
+    border-radius: 1em;
+}

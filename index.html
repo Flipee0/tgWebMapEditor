@@ -3,24 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="static/styles/index.css">
+    <link rel="stylesheet" href="static/styles/buttons.css">
+    <link rel="stylesheet" href="static/styles/downloadButton.css">
+    <link rel="stylesheet" href="static/styles/locations.css">
+    <link rel="stylesheet" href="static/styles/help.css">
+    <script src="https://kit.fontawesome.com/f23f70e7d4.js" crossorigin="anonymous"></script>
     <script src="static/js/main.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <title>Title</title>
 </head>
 <body>
+<div class="control" id="control">
     <div id="indicator" class="isWrite"></div>
     <img src="static/images/maps/1.png" alt="map" id="sketch" hidden="hidden">
-    <canvas id="canvas"></canvas>
-    <button id="download">Download Canvas</button>
-    <form id="Pens">
-        <input class="Pen" type="radio" name="pen" value="Brush" id="Brush">
-        <label for="Brush">Кисть</label>
-        <input class="Pen" type="radio" name="pen" value="Line" id="Line">
-        <label for="Line">Линия</label>
-        <input class="Pen" type="radio" name="pen" value="NoiseLine" id="NoiseLine">
-        <label for="NoiseLine">Ломаная линия</label>
+    <button id="undo" class="controlUnit button"><i class="fa-solid fa-rotate-left"></i></button>
+    <button id="clear" class="controlUnit button"><i class="fa-regular fa-trash-can"></i></button>
+    <form id="Pens" class="controlUnit" id="pensForm">
+        <div class="radio" id="radioGroup">
+            <input class="Pen" label="Кисть" type="radio" id="Brush" name="pen" value="Brush" checked>
+            <input class="Pen" label="Линия" type="radio" id="Line" name="pen" value="Line">
+            <input class="Pen" label="Ломаная линия" type="radio" id="NoiseLine" name="pen" value="NoiseLine">
+        </div>
     </form>
-    <button id="undo">Стереть последнюю линию</button>
-    <button id="clear">Очистить маршрут</button>
+    <div class="text-box leftAlign">
+        <a href="#" class="btn btn-white btn-animate" id="openHelp">Помощь</a>
+    </div>
+    <div class="text-box">
+        <a href="#" class="btn btn-white btn-animate" id="selectLocation">Выбрать локацию</a>
+    </div>
+    <div class="text-box">
+        <a href="#" class="btn btn-white btn-animate" id="download">Скачать карту</a>
+    </div>
+</div>
+<canvas id="canvas"></canvas>
+
+<div class="locationWindow" id="locationWindow">
+    <div class="locationControl">
+        <button id="closeLocations" class="button"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="locations">
+        <div class="locationItem" id="1">
+            <p class="locationName">ЯГТУ</p>
+            <img class="locationPreview" src="static/images/maps/1.png" alt="">
+        </div>
+        <div class="locationItem" id="2">
+            <p class="locationName">Нефтяник</p>
+            <img class="locationPreview" src="static/images/maps/2.png" alt="">
+        </div>
+        <div class="locationItem" id="3">
+            <p class="locationName">Около ЯГТУ</p>
+            <img class="locationPreview" src="static/images/maps/3.png" alt="">
+        </div>
+        <div class="locationItem" id="4">
+            <p class="locationName">Суздалка</p>
+            <img class="locationPreview" src="static/images/maps/4.png" alt="">
+        </div>
+        <div class="locationItem" id="5">
+            <p class="locationName">Центр</p>
+            <img class="locationPreview" src="static/images/maps/5.png" alt="">
+        </div>
+        <div class="locationItem" id="6">
+            <p class="locationName">Бутовкий парк</p>
+            <img class="locationPreview" src="static/images/maps/6.png" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="help" id="help">
+    <div class="helpControl">
+        <button id="closeHelp" class="button"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="helpItems">
+        <h1>Помощь</h1>
+        <p class="helpText helpItem">
+            Привет! Перед тобой графический редактор для рисования маршрутов на карте. Для
+            рисования можно использовать несколько инструментов:
+        </p>
+        <p class="helpText helpItem">
+            1) Кисть - думаю, что тут все понятно
+        </p>
+        <p class="helpText helpItem">
+            2) Линия - при выборе этого инструмента, необходимо задать 2 точки, по которым построится прямая линия
+        </p>
+        <p class="helpText helpItem">
+            3) Ломаная линия - работает как обычная линия, но по пути несколько раз "ломается". Это можно использовать
+            для имитации отклонений во время прохождения маршрута (ведь не всегда человек идет ровно по прямой линии)
+            или для имитации неточности геолокации (она тоже не всегда работает точно). В общем, тут все тоже довольно
+            просто - тыкай 2 точки, а остальное за тебя сделает программа
+        </p>
+        <p class="helpText helpItem">
+            Теперь про функционал кнопок:
+        </p>
+        <div class="helpItem picDescription">
+            <button class="button"><i class="fa-solid fa-rotate-left"></i></button>
+            <p class="helpText">
+                кнопка отмены предыдущего действия. Допустим, нарисовать линию точно не получилось,
+                тогда тыкни на эту кнопку, и линия удалится
+            </p>
+        </div>
+        <div class="helpItem picDescription">
+            <button class="button"><i class="fa-regular fa-trash-can"></i></button>
+            <p class="helpText">
+                тут все просто, кнопка нужна для полной очистки карты от всех маршрутов
+            </p>
+        </div>
+        <p class="helpText helpItem">
+            Выбрать локацию - редактор позволяет работать с несколькими заготовленными картами. Эта кнопка позволяет
+            выбрать, на какой локации необходимо построить маршрут.
+        </p>
+        <p class="helpText helpItem">
+            Скачать карту - пояснения не требуются (надеюсь)
+        </p>
+        <p class="helpText helpItem" style="margin-top: 2em">
+            Приятного пользования сервисом! Для большего удобства рекомендую использовать компуктер, но это не
+            обязательно
+        </p>
+    </div>
+</div>
 </body>
 </html>

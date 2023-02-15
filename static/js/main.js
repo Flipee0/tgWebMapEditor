@@ -7,11 +7,44 @@ const NOISE_PX_PERIOD = 20;
 const NOISE_PX_DEVIATION = 2;
 
 window.onload = () => {
-    let tg = window.Telegram.WebApp;
+    let locationWindow = document.getElementById('locationWindow');
+    let locationOpenButton = document.getElementById('selectLocation');
+    let locationCloseButton = document.getElementById('closeLocations');
+
+    let helpWindow = document.getElementById('help');
+    let helpOpenButton = document.getElementById('openHelp');
+    let helpCloseButton = document.getElementById('closeHelp');
+
+    function closeLocations() {
+        locationWindow.style.display = "none";
+    }
+
+    locationCloseButton.addEventListener("click", () => closeLocations())
+    locationOpenButton.addEventListener('click', () => {
+        locationWindow.style.display = "flex";
+    });
+
+    let nowImage = document.getElementById("sketch");
+    let locationItems = locationWindow.getElementsByClassName('locationItem');
+    for (let locationItem = 0; locationItem < locationItems.length; locationItem++) {
+        locationItems[locationItem].addEventListener('click', function () {
+            nowImage = this.getElementsByClassName('locationPreview')[0];
+            clearDrawing();
+            closeLocations();
+        });
+    }
+
+    helpCloseButton.addEventListener("click", () => {
+        helpWindow.style.display = "none";
+    })
+    helpOpenButton.addEventListener('click', () => {
+        helpWindow.style.display = "flex";
+    });
+
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     const indicator = document.getElementById('indicator');
-    const pensForm = document.getElementById('Pens')
+    const pensForm = document.getElementById('Pens');
 
     const PEN_BRUSH = 'Brush';
     const PEN_LINE = 'Line';
@@ -47,8 +80,16 @@ window.onload = () => {
         createEl.remove();
     });
 
-    canvas.setAttribute('width', window.innerWidth);
-    canvas.setAttribute('height', window.innerWidth * (670 / 890));
+    if (window.innerWidth * (670 / 890) < window.innerHeight) {
+        document.getElementById('control').style.width = window.innerWidth - 100 + 'px'
+        canvas.setAttribute('width', window.innerWidth - 100);
+        canvas.setAttribute('height', (window.innerWidth - 100) * (670 / 890));
+    }
+    else {
+        document.getElementById('control').style.width = (window.innerHeight - 100) * (890 / 670) + 'px'
+        canvas.setAttribute('width', (window.innerHeight - 100) * (890 / 670));
+        canvas.setAttribute('height', window.innerHeight - 100);
+    }
 
     ctx.lineWidth = config.lineSize;
     ctx.lineJoin = 'round';
@@ -92,24 +133,24 @@ window.onload = () => {
                 firstDotFlag = false;
                 positions = [
                     [firstDotX, firstDotY],
-                    [e.clientX, e.clientY],
+                    [getXInCanvas(e), getYInCanvas(e)],
                 ];
                 positionsGroups.push(positions)
-                draw(e.clientX, e.clientY);
+                draw(getXInCanvas(e), getYInCanvas(e));
             }
             else {
                 firstDotFlag = true;
-                firstDotX = e.clientX;
-                firstDotY = e.clientY;
-                ctx.moveTo(e.clientX, e.clientY);
+                firstDotX = getXInCanvas(e);
+                firstDotY = getYInCanvas(e);
+                ctx.moveTo(getXInCanvas(e), getYInCanvas(e));
             }
         }
         else if (selectedPen === PEN_NOISE_LINE) {
             if (firstDotFlag) {
                 firstDotFlag = false;
 
-                let deltaX =  e.clientX - firstDotX;
-                let deltaY =  e.clientY - firstDotY;
+                let deltaX =  getXInCanvas(e) - firstDotX;
+                let deltaY =  getYInCanvas(e) - firstDotY;
 
                 let range = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
                 let pointsNum = Math.trunc(range / NOISE_PX_PERIOD);
@@ -122,7 +163,7 @@ window.onload = () => {
                     let y = firstDotY + yNoiseRange * i + randomNoiseNum(NOISE_PX_DEVIATION)
                     points.push([x, y]);
                 }
-                points.push([e.clientX, e.clientY]);
+                points.push([getXInCanvas(e), getYInCanvas(e)]);
                 for (let point in points) {
                     draw(points[point][0], points[point][1]);
                 }
@@ -136,16 +177,16 @@ window.onload = () => {
             }
             else {
                 firstDotFlag = true;
-                firstDotX = e.clientX;
-                firstDotY = e.clientY;
-                ctx.moveTo(e.clientX, e.clientY);
+                firstDotX = getXInCanvas(e);
+                firstDotY = getYInCanvas(e);
+                ctx.moveTo(getXInCanvas(e), getYInCanvas(e));
             }
         }
     }
 
     function drawPen(e) {
-        positions.push([e.clientX, e.clientY]);
-        draw(e.clientX, e.clientY);
+        positions.push([getXInCanvas(e), getYInCanvas(e)]);
+        draw(getXInCanvas(e), getYInCanvas(e));
     }
 
     // Main draw functions
@@ -195,8 +236,12 @@ window.onload = () => {
     }
 
     function setBackground() {
-        let img = document.getElementById("sketch");
-        ctx.drawImage(img, 0, 0, window.innerWidth, window.innerWidth * (670 / 890));
+        if (window.innerWidth * (670 / 890) < window.innerHeight) {
+            ctx.drawImage(nowImage, 0, 0, window.innerWidth - 100, (window.innerWidth - 100) * (670 / 890));
+        }
+        else {
+            ctx.drawImage(nowImage, 0, 0, (window.innerHeight - 100) * (890 / 670), window.innerHeight - 100);
+        }
     }
 
     function clearDrawing() {
@@ -206,5 +251,13 @@ window.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.beginPath();
         setBackground();
+    }
+
+    function getXInCanvas(e) {
+        return e.clientX - canvas.getBoundingClientRect().x;
+    }
+
+    function getYInCanvas(e) {
+        return e.clientY - canvas.getBoundingClientRect().y;
     }
 }
