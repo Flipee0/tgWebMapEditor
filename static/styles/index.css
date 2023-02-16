@@ -43,10 +43,17 @@ body {
     display: flex;
     height: 3em;
     align-items: center;
-    margin-top: 1em;
-    margin-bottom: 1em;
     justify-content: flex-start;
     flex-wrap: wrap;
+}
+
+.controlLine {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 1em;
 }
 
 .pen {
@@ -102,10 +109,6 @@ body {
 
 .text-box {
     margin-right: 0.5em;
-}
-
-.leftAlign {
-    margin-left: auto;
 }
 
 .controlUnit {

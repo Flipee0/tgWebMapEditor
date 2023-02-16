@@ -98,8 +98,8 @@ window.onload = () => {
     }
     else {
         document.getElementById('control').style.width = (window.innerHeight - 100) * (890 / 670) + 'px'
-        canvas.setAttribute('width', (window.innerHeight - 100) * (890 / 670));
-        canvas.setAttribute('height', window.innerHeight - 100);
+        canvas.setAttribute('width', (window.innerHeight - 150) * (890 / 670));
+        canvas.setAttribute('height', window.innerHeight - 150);
     }
 
     ctx.lineWidth = config.lineSize;
