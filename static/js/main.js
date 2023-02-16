@@ -248,18 +248,26 @@ window.onload = () => {
 
     function setDefaultPictures() {
         if (window.innerWidth * (670 / 890) < window.innerHeight) {
+            ctx.drawImage(startDot, startDot.offsetLeft - canvas.getBoundingClientRect().x,
+                startDot.offsetTop - canvas.getBoundingClientRect().y, startDot.offsetWidth, startDot.offsetHeight);
+            ctx.drawImage(endDot, endDot.offsetLeft - canvas.getBoundingClientRect().x,
+                endDot.offsetTop - canvas.getBoundingClientRect().y, endDot.offsetWidth, endDot.offsetHeight);
+
             startDot.style.width = (window.innerWidth - 100) * (39/445) + 'px';
             startDot.style.height = ((window.innerWidth - 100) * (670 / 890)) * (39/335) + 'px';
             endDot.style.width = (window.innerWidth - 100) * (42/445) + 'px';
             endDot.style.height = ((window.innerWidth - 100) * (670 / 890)) * (54/335) + 'px';
+
             ctx.drawImage(nowImage, 0, 0, window.innerWidth - 100, (window.innerWidth - 100) * (670 / 890));
         }
         else {
-            ctx.drawImage(nowImage, 0, 0, (window.innerHeight - 100) * (890 / 670), window.innerHeight - 100);
+
             startDot.style.width = ((window.innerHeight - 100) * (890 / 670)) * (39/445) + 'px';
             startDot.style.height = (window.innerHeight - 100) * (39/335) + 'px';
             endDot.style.width = ((window.innerHeight - 100) * (890 / 670)) * (42/445) + 'px';
             endDot.style.height = (window.innerHeight - 100) * (54/335) + 'px';
+
+            ctx.drawImage(nowImage, 0, 0, (window.innerHeight - 100) * (890 / 670), window.innerHeight - 100);
         }
     }
 

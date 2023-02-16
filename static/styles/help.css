@@ -16,6 +16,7 @@ h1 {
     display: none;
     flex-direction: column;
     overflow: auto;
+    z-index: 11;
 }
 
 .help::-webkit-scrollbar {

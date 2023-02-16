@@ -8,6 +8,7 @@
     display: none;
     flex-direction: column;
     overflow: auto;
+    z-index: 11;
 }
 
 .locationWindow::-webkit-scrollbar {
