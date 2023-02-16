@@ -242,7 +242,7 @@ window.onload = () => {
         if (window.innerWidth * (670 / 890) < window.innerHeight) {
             startDot.style.width = (window.innerWidth - 100) * (39/445) + 'px';
             startDot.style.height = ((window.innerWidth - 100) * (670 / 890)) * (39/335) + 'px';
-            endDot.style.width = (window.innerWidth - 100) * (45/445) + 'px';
+            endDot.style.width = (window.innerWidth - 100) * (39/445) + 'px';
             endDot.style.height = ((window.innerWidth - 100) * (670 / 890)) * (54/335) + 'px';
             ctx.drawImage(nowImage, 0, 0, window.innerWidth - 100, (window.innerWidth - 100) * (670 / 890));
         }
