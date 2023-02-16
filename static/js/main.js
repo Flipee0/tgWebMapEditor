@@ -73,6 +73,11 @@ window.onload = () => {
     }
     // download
     document.getElementById('download').addEventListener('click', function(e) {
+        ctx.drawImage(startDot, startDot.offsetLeft - canvas.getBoundingClientRect().x,
+            startDot.offsetTop - canvas.getBoundingClientRect().y, startDot.offsetWidth, startDot.offsetHeight);
+        ctx.drawImage(endDot, endDot.offsetLeft - canvas.getBoundingClientRect().x,
+            endDot.offsetTop - canvas.getBoundingClientRect().y, endDot.offsetWidth, endDot.offsetHeight);
+
         let canvasUrl = canvas.toDataURL();
         const createEl = document.createElement('a');
         createEl.href = canvasUrl;
@@ -242,7 +247,7 @@ window.onload = () => {
         if (window.innerWidth * (670 / 890) < window.innerHeight) {
             startDot.style.width = (window.innerWidth - 100) * (39/445) + 'px';
             startDot.style.height = ((window.innerWidth - 100) * (670 / 890)) * (39/335) + 'px';
-            endDot.style.width = (window.innerWidth - 100) * (39/445) + 'px';
+            endDot.style.width = (window.innerWidth - 100) * (42/445) + 'px';
             endDot.style.height = ((window.innerWidth - 100) * (670 / 890)) * (54/335) + 'px';
             ctx.drawImage(nowImage, 0, 0, window.innerWidth - 100, (window.innerWidth - 100) * (670 / 890));
         }
@@ -250,7 +255,7 @@ window.onload = () => {
             ctx.drawImage(nowImage, 0, 0, (window.innerHeight - 100) * (890 / 670), window.innerHeight - 100);
             startDot.style.width = ((window.innerHeight - 100) * (890 / 670)) * (39/445) + 'px';
             startDot.style.height = (window.innerHeight - 100) * (39/335) + 'px';
-            endDot.style.width = ((window.innerHeight - 100) * (890 / 670)) * (39/445) + 'px';
+            endDot.style.width = ((window.innerHeight - 100) * (890 / 670)) * (42/445) + 'px';
             endDot.style.height = (window.innerHeight - 100) * (54/335) + 'px';
         }
     }
