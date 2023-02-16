@@ -86,6 +86,8 @@ window.onload = () => {
 
         createEl.click();
         createEl.remove();
+
+        clearDrawing();
     });
 
     if (window.innerWidth * (670 / 890) < window.innerHeight) {
