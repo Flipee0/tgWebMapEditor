@@ -4,6 +4,7 @@ canvas {
     display: block;
     touch-action: none;
     border-radius: 2em;
+    margin-top: 1em;
 }
 
 .isWrite {
@@ -45,6 +46,7 @@ body {
     margin-top: 1em;
     margin-bottom: 1em;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .pen {

@@ -90,6 +90,7 @@ window.onload = () => {
         clearDrawing();
     });
 
+    let controlHeight =  document.getElementById('control').innerHeight
     if (window.innerWidth * (670 / 890) < window.innerHeight) {
         document.getElementById('control').style.width = window.innerWidth - 100 + 'px'
         canvas.setAttribute('width', window.innerWidth - 100);
